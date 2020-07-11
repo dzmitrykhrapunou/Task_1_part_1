@@ -7,15 +7,31 @@ namespace Task_1_part_1
 {
     public class AlgorithmGCD
     {
-        public static int GCD(int a, int b)
+        public static int GCD(int a, int b, out long elapsedTime)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             a = (int)Math.Abs(a);
             b = (int)Math.Abs(b);
 
-            if (a == 0 && b != 0) return b;
-            if (b == 0 && a != 0) return a;
-            if (b == 0 && a == 0) return 0;
-
+            if (a == 0 && b != 0)
+            {
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks;
+                return b; 
+            }
+            if (b == 0 && a != 0)
+            {
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks;
+                return a;
+            }
+            if (b == 0 && a == 0)
+            {
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks;
+                return 0;
+            }
             while (a != b)
             {
                 if (a > b)
@@ -27,15 +43,17 @@ namespace Task_1_part_1
                     b = b - a;
                 }
             }
+            sw.Stop();
+            elapsedTime = sw.ElapsedTicks;
             return b;
         }
         public static int GCD(int a, int b, int c)
         {
-            int n = GCD(a, b);
+            int n = GCD(a, b, out long elapsedTime);
         
             c = (int)Math.Abs(c);
 
-            if (c == 0) return GCD(a, b);
+            if (c == 0) return n;
             if (n == 0 && c != 0) return c;
 
             while (n != c)
@@ -53,15 +71,15 @@ namespace Task_1_part_1
         }
         public static int GCD(int a, int b, int c, int d)
         {
-            int n = GCD(a, b);
-            int m = GCD(c, d);
+            int n = GCD(a, b, out long elapsedTime);
+            int m = GCD(c, d, out elapsedTime);
 
             d = (int)Math.Abs(d);
 
             if (n == 0 && m == 0 && d == 0) return 0;
             if (n == 0 && m == 0 && d != 0) return d;
             if (n != 0 && m == 0 && d == 0) return n;
-            if (n == 0 && m != 0 && d != 0) return GCD(m, d);
+            if (n == 0 && m != 0 && d != 0) return GCD(m, d, out elapsedTime);
 
 
             while (n != m)
@@ -79,7 +97,7 @@ namespace Task_1_part_1
         }
         public static int GCD(int a, int b, int c, int d, int e)
         {
-            int n = GCD(a, b);
+            int n = GCD(a, b, out long elapsedTime);
             int m = GCD(c, d, e);
 
             if (n == 0 && m == 0) return 0;

@@ -21,11 +21,12 @@ namespace Task_1_part_1
             Console.Write("E = ");
             int e = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Наибольший общий делитель для первых двух чисел {0}, {1} равен {2}", a, b, AlgorithmGCD.GCD(a, b));
+            Console.WriteLine("Наибольший общий делитель для первых двух чисел {0}, {1} равен {2}", a, b, AlgorithmGCD.GCD(a, b, out long elapsedTime));
             Console.WriteLine("Наибольший общий делитель для первых трех чисел {0}, {1}, {2} равен {3}", a, b, c, AlgorithmGCD.GCD(a, b, c));
             Console.WriteLine("Наибольший общий делитель для первых четырех чисел {0}, {1}, {2}, {3} равен {4}", a, b, c, d, AlgorithmGCD.GCD(a, b, c, d));
             Console.WriteLine("Наибольший общий делитель для пяти чисел {0}, {1}, {2}, {3}, {4} равен {5}", a, b, c, d, e, AlgorithmGCD.GCD(a, b, c, d, e));
-            
+            Console.WriteLine($"Время работы алгоритма Евклида для двух параметров равно {elapsedTime} мкСек");
+
             Console.WriteLine();
             Console.WriteLine("Алгоритм Стейна");
             Console.WriteLine("Введите два целых числа");
@@ -33,7 +34,7 @@ namespace Task_1_part_1
             int i = Convert.ToInt32(Console.ReadLine());
             Console.Write("B = ");
             int j = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Наибольший общий делитель для чисел {0}, {1} равен {2}", i, j, AlgorithmGCD.GCD_byStein(i, j, out long elapsedTime));
+            Console.WriteLine("Наибольший общий делитель для чисел {0}, {1} равен {2}", i, j, AlgorithmGCD.GCD_byStein(i, j, out elapsedTime));
             Console.WriteLine($"Время работы алгоритма Стейна равно {elapsedTime} мкСек");
 
             Console.ReadKey();            
