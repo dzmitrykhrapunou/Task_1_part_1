@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Task_1_part_1
 {
@@ -10,6 +11,10 @@ namespace Task_1_part_1
         {
             a = (int)Math.Abs(a);
             b = (int)Math.Abs(b);
+
+            if (a == 0 && b != 0) return b;
+            if (b == 0 && a != 0) return a;
+            if (b == 0 && a == 0) return 0;
 
             while (a != b)
             {
@@ -29,6 +34,9 @@ namespace Task_1_part_1
             int n = GCD(a, b);
         
             c = (int)Math.Abs(c);
+
+            if (c == 0) return GCD(a, b);
+            if (n == 0 && c != 0) return c;
 
             while (n != c)
             {
@@ -50,6 +58,12 @@ namespace Task_1_part_1
 
             d = (int)Math.Abs(d);
 
+            if (n == 0 && m == 0 && d == 0) return 0;
+            if (n == 0 && m == 0 && d != 0) return d;
+            if (n != 0 && m == 0 && d == 0) return n;
+            if (n == 0 && m != 0 && d != 0) return GCD(m, d);
+
+
             while (n != m)
             {
                 if (n > m)
@@ -68,6 +82,10 @@ namespace Task_1_part_1
             int n = GCD(a, b);
             int m = GCD(c, d, e);
 
+            if (n == 0 && m == 0) return 0;
+            if (n != 0 && m == 0) return n;
+            if (n == 0 && m != 0) return m;
+
             while (n != m)
             {
                     if (n > m)
@@ -81,31 +99,45 @@ namespace Task_1_part_1
             }
             return m;
         }
-
-            //int min;
-            //if (a > b) min = b;
-            //else min = a;
-            //int i = min;
-            //int c = 0;
-            //while (i > 0 && c == 0)
-            //{
-            //    if ((a % i == 0) && (b % i == 0))
-            //        c = i;
-            //    i--;
-            //}
-            //Console.WriteLine(c);
-
-            static int GCD_byStein(int i, int j)
+    
+        public static int GCD_byStein(int i, int j)
         {
             if (i == 0) return j;
             if (j == 0) return i;
-            if (i == j) return i;
-            if (i == 1 || j == 1) return 1;
-            if ((i % 2 == 0) && (j % 2 == 0)) return 2 * GCD_byStein(i / 2, j / 2);
-            if ((i % 2 == 0) && (j % 2 != 0)) return GCD_byStein(i / 2, j);
-            if ((i % 2 != 0) && (j % 2 == 0)) return GCD_byStein(i, j / 2);
-            return GCD_byStein(j, (int)Math.Abs(i - j));
-        }
+            if (i != 0 && j != 0)
+            {
+                i = (int)Math.Abs(i);
+                j = (int)Math.Abs(j);
 
+                int x = 1;
+
+                while (i != 0 && j != 0)
+                {
+                    while (i % 2 == 0 && j % 2 == 0)
+                    {
+                        i /= 2;
+                        j /= 2;
+                        x *= 2;
+                    }
+
+                    if (i % 2 == 0 && j % 2 != 0)
+                        while (i % 2 == 0)
+                            i /= 2;
+
+                    if (j % 2 == 0 && i % 2 != 0)
+                        while (j % 2 == 0)
+                            j /= 2;
+
+                    if (i >= j)
+                        i -= j;
+                    else
+                        j -= i;
+                }
+
+                return j * x;
+            }
+            else
+            return 0;
+        }
     }
 }
