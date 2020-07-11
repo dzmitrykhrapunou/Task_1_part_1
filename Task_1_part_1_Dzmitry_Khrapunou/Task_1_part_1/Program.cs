@@ -33,9 +33,10 @@ namespace Task_1_part_1
             int i = Convert.ToInt32(Console.ReadLine());
             Console.Write("B = ");
             int j = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Наибольший общий делитель для чисел {0}, {1} равен {2}", i, j, AlgorithmGCD.GCD_byStein(i, j));
+            Console.WriteLine("Наибольший общий делитель для чисел {0}, {1} равен {2}", i, j, AlgorithmGCD.GCD_byStein(i, j, out long elapsedTime));
+            Console.WriteLine($"Время работы алгоритма Стейна равно {elapsedTime} мкСек");
 
-            Console.ReadKey();
+            Console.ReadKey();            
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
+using System.Diagnostics;
 
 namespace Task_1_part_1
 {
@@ -100,10 +100,22 @@ namespace Task_1_part_1
             return m;
         }
     
-        public static int GCD_byStein(int i, int j)
+        public static int GCD_byStein(int i, int j, out long elapsedTime)
         {
-            if (i == 0) return j;
-            if (j == 0) return i;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            if (i == 0)
+            {
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks; 
+                return j;
+            }
+            if (j == 0)
+            {
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks;
+                return i;
+            }
             if (i != 0 && j != 0)
             {
                 i = (int)Math.Abs(i);
@@ -133,10 +145,13 @@ namespace Task_1_part_1
                     else
                         j -= i;
                 }
-
+                sw.Stop();
+                elapsedTime = sw.ElapsedTicks;
                 return j * x;
             }
             else
+            sw.Stop();
+            elapsedTime = sw.ElapsedTicks;
             return 0;
         }
     }
