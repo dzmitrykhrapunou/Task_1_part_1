@@ -15,7 +15,7 @@ namespace Task_1_part_1
         /// <param name="b">the second number</param>
         /// <param name="elapsedTime">elapsed time</param>
         /// <returns>GCD for a and b</returns>
-        public static int GCD(int a, int b, out long elapsedTime)
+        public static int GCD(int a, int b, out long elapsedTime1)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -25,19 +25,19 @@ namespace Task_1_part_1
             if (a == 0 && b != 0)
             {
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime1 = sw.ElapsedTicks;
                 return b;
             }
             if (b == 0 && a != 0)
             {
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime1 = sw.ElapsedTicks;
                 return a;
             }
             if (b == 0 && a == 0)
             {
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime1 = sw.ElapsedTicks;
                 return 0;
             }
             while (a != b)
@@ -52,7 +52,7 @@ namespace Task_1_part_1
                 }
             }
             sw.Stop();
-            elapsedTime = sw.ElapsedTicks;
+            elapsedTime1 = sw.ElapsedTicks;
             return b;
         }
 
@@ -160,20 +160,20 @@ namespace Task_1_part_1
         /// <param name="j">the second number</param>
         /// <param name="elapsedTime">elapsed time</param>
         /// <returns>GCD for i and j</returns>
-        public static int GCD_ByStein(int i, int j, out long elapsedTime)
+        public static int GCD_ByStein(int i, int j, out long elapsedTime2)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
             if (i == 0)
             {
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime2 = sw.ElapsedTicks;
                 return j;
             }
             if (j == 0)
             {
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime2 = sw.ElapsedTicks;
                 return i;
             }
             if (i != 0 && j != 0)
@@ -206,13 +206,58 @@ namespace Task_1_part_1
                         j -= i;
                 }
                 sw.Stop();
-                elapsedTime = sw.ElapsedTicks;
+                elapsedTime2 = sw.ElapsedTicks;
                 return j * x;
             }
             else
                 sw.Stop();
-            elapsedTime = sw.ElapsedTicks;
+            elapsedTime2 = sw.ElapsedTicks;
             return 0;
         }
+        /// <summary>
+        /// The method that compares the running time of two algorithms
+        /// </summary>
+        /// <param name="time1">Euclid's algorithm running time</param>
+        /// <param name="time2">Stein's algorithm running time</param>
+        /// <param name="difference">time difference</param>
+        public static void ElapsedTimeForTwoMetods()
+        {
+            int[,] numbers = new int[3,2] { { 0, 1 }, { 2, 3 }, { 4, 5 } };
+            long[,] timeResult = new long[3, 3];                       
+            
+            for (int r = 0, w = 0, i = 0, j = 0; w < 3; w++, i++, r++)
+            {
+                 int a = numbers[i, j];
+                 int b = numbers[i, j + 1];
+                 long difference = 0;
+
+                 AlgorithmGCD.GCD(a, b, out long elapsedTime1);
+                 long time1 = elapsedTime1;
+                 AlgorithmGCD.GCD_ByStein(a, b, out long elapsedTime2);
+                 long time2 = elapsedTime2;
+
+                 if (time1 > time2)
+                     difference = time1 - time2;
+                 else
+                     difference = time2 - time1;
+
+                 timeResult[0, w] = time1;
+                 timeResult[1, w] = time2;
+                 timeResult[2, w] = difference;
+            }
+
+            int rows = timeResult.GetUpperBound(0) + 1;
+            int columns = timeResult.Length / rows;
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write($"{timeResult[i, j]} mkSek \t");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }                
+        }       
     }
 }

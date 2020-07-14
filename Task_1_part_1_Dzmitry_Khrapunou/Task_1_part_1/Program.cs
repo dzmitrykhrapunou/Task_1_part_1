@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading;
 
 namespace Task_1_part_1
 {
     class Program
     {
         static void Main(string[] args)
-        {
+        {            
             Console.WriteLine("Euclidean Algorithm");
             Console.WriteLine("Please enter five integers");
             Console.Write("A = ");
@@ -37,6 +35,10 @@ namespace Task_1_part_1
             Console.WriteLine("The greatest common factor for the numbers {0}, {1} is {2}", i, j, AlgorithmGCD.GCD_ByStein(i, j, out elapsedTime));
             Console.WriteLine($"Stein's algorithm running time is {elapsedTime} mkSec");
 
+            Console.WriteLine();
+            Console.WriteLine("Comparing the running time of two algorithms");
+            AlgorithmGCD.ElapsedTimeForTwoMetods();
+                        
             Console.ReadKey();            
         }
     }
