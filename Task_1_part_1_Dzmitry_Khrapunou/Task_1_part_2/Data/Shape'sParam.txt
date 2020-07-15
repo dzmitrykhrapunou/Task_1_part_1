@@ -1,0 +1,8 @@
+Circle|5
+Circle|7
+Circle|0
+Rectangle|5|4
+Rectangle|2|3
+Triangle|2|5|5
+Triangle|8|12|8
+fgfgfgfg

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+using Task_1_part_2.Entities;
 
 namespace Task_1_part_2
 {
@@ -8,15 +7,7 @@ namespace Task_1_part_2
     {
         static void Main(string[] args)
         {
-            Shape[] shapes =
-            {   new Circle(5),
-                new Circle(7),
-                new Circle(5),
-                new Rectangle(5,4),
-                new Rectangle(2,3),
-                new Triangle(2,5,5),
-                new Triangle(8,12,8),
-            };
+            Shape[] shapes = FileReader.ReadTxt();
 
             var circle = new Circle(5);
             OutputMethod(shapes, circle, String.Format("The list of circles with radius = {0}:", circle.radius));
