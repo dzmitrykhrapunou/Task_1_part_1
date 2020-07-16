@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_1_part_1", "Task_1_par
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTest", "NUnitTest\NUnitTest.csproj", "{A46C17B6-C849-44CD-B141-A492D050800D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_1_part_2", "Task_1_part_2\Task_1_part_2.csproj", "{D1D92579-3F5C-4E3B-96DE-06A4B6F3BD71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_1_part_2", "Task_1_part_2\Task_1_part_2.csproj", "{D1D92579-3F5C-4E3B-96DE-06A4B6F3BD71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
