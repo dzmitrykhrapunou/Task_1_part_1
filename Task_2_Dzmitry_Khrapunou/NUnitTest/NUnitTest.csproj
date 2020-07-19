@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Task_2_Dzmitry_Khrapunou\Task_2_Part_1_Dzmitry_Khrapunou.csproj" />
+    <ProjectReference Include="..\Task_2_Part_2_Dzmitry_Khrapunou\Task_2_Part_2_Dzmitry_Khrapunou.csproj" />
   </ItemGroup>
 
 </Project>

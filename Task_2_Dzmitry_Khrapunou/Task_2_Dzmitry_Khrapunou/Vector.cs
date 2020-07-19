@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Task_2_Part_1_Dzmitry_Khrapunou
 {
@@ -140,12 +138,11 @@ namespace Task_2_Part_1_Dzmitry_Khrapunou
         public override int GetHashCode()
         {
             int hash = 23;
-            unchecked
-            {
+           
                 hash = hash * 187739 + x.GetHashCode();
                 hash = hash * 187739 + y.GetHashCode();
                 hash = hash * 187739 + z.GetHashCode();
-            }
+            
             return hash;
         }
     
