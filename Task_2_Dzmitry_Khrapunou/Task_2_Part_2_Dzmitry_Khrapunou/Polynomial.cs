@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Task_2_Part_2_Dzmitry_Khrapunou
+namespace Task2Part2DzmitryKhrapunou
 {
     public class Polynomial
     {

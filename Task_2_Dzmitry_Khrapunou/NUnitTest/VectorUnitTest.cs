@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using System;
-using Task_2_Part_1_Dzmitry_Khrapunou;
+using Task2Part1DzmitryKhrapunou;
 
 namespace NUnitTest
 {

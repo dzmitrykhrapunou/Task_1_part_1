@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task_2_Part_1_Dzmitry_Khrapunou
+namespace Task2Part1DzmitryKhrapunou
 {
     public class Vector
     {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -13,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Task_2_Dzmitry_Khrapunou\Task_2_Part_1_Dzmitry_Khrapunou.csproj" />
-    <ProjectReference Include="..\Task_2_Part_2_Dzmitry_Khrapunou\Task_2_Part_2_Dzmitry_Khrapunou.csproj" />
+    <ProjectReference Include="..\Task_2_Dzmitry_Khrapunou\Task2Part1DzmitryKhrapunou.csproj" />
+    <ProjectReference Include="..\Task_2_Part_2_Dzmitry_Khrapunou\Task2Part2DzmitryKhrapunou.csproj" />
+    <ProjectReference Include="..\Task_2_Part_3_Dzmitry_Khrapunou\Task_2_Part_3_Dzmitry_Khrapunou\Task2Part3DzmitryKhrapunou.csproj" />
   </ItemGroup>
 
 </Project>

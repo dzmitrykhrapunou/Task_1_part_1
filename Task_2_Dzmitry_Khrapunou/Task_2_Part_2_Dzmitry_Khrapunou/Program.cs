@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task_2_Part_2_Dzmitry_Khrapunou
+namespace Task2Part2DzmitryKhrapunou
 {
     class Program
     {
