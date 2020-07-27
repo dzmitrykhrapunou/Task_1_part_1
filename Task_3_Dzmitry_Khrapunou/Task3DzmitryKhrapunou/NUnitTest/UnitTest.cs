@@ -1,6 +1,8 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using Task3DzmitryKhrapunou.Data;
 using Task3DzmitryKhrapunou.Entities;
+using Task3DzmitryKhrapunou.Interfaces;
 
 namespace NUnitTest
 {
@@ -107,5 +109,159 @@ namespace NUnitTest
 
             Assert.AreEqual(circle.Area(), Area);
         }
+
+        [TestCase(1)]
+        public void Index_GetsFreeIndexInMas_ReturnsIndexOfEmpty(int a)
+        {
+            var box = new Box();
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[2] = new Circle(new Film(), 7);
+            int? res = box.GetFree();
+
+            Assert.AreEqual(res, a);
+        }
+
+        [TestCase(2)]
+        public void Search_GetsShapeByIndex_ReturnsShape(int a)
+        {
+            var box = new Box();
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            var res = box.GetByIndex(a);
+            var expectedRes = new Triangle(new Film(), 7);
+
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [TestCase(2)]
+        public void Search_DeleteByIndex(int a)
+        {
+            var box = new Box();
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            box.Extract(a);
+            string expectedRes = null;
+
+            Assert.AreEqual(box.Shapes[2], expectedRes);
+        }
+
+        [TestCase(3)]
+        public void Search_ReplaceByIndex(int a)
+        {
+            var box = new Box();
+            var shape = new Triangle(new Paper(Color.Blue), 7);
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            box.Change(shape, a);
+            var expectedRes = shape;
+
+            Assert.AreEqual(box.Shapes[3], expectedRes);
+        }
+
+        [TestCase(4)]
+        public void Search_GetCountOfNotEmptyElementsInMas_ReturnsQuantity(int a)
+        {
+            var box = new Box();
+            
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            int res = box.GetCount();
+            var expectedRes = a;
+
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [TestCase(50)]
+        public void Search_GetsSummArea_ReturnSumm(int a)
+        {
+            var box = new Box();
+            
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            int res = (int)box.SummArea();
+            var expectedRes = a;
+
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [TestCase(54)]
+        public void Search_GetsSummPerimeter_ReturnSumm(int a)
+        {
+            var box = new Box();
+
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            int res = (int)box.SumPerimeter();
+            var expectedRes = a;
+
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [Test]
+        public void Search_GetsAllCircles_ReturnCircles()
+        {
+            var box = new Box();
+            var expectedRes = new List<IShape>();
+            
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+
+            expectedRes.Add(box.Shapes[0]);
+            expectedRes.Add(box.Shapes[3]);
+            var res = box.ExtractAllCircles();
+            
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [Test]
+        public void Search_GetsAllShapesFromFilm_ReturnShapesFromFilm()
+        {
+            var box = new Box();
+            var expectedRes = new List<IShape>();
+
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Paper(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Paper(), 2);
+
+            expectedRes.Add(box.Shapes[0]);
+            expectedRes.Add(box.Shapes[2]);
+            var res = box.ExtractAllFilmShapes();
+
+            Assert.AreEqual(res, expectedRes);
+        }
+
+        [Test]
+        public void Search_GetsAllShapesFromPaper_ReturnShapesFromPaper()
+        {
+            var box = new Box();
+            var expectedRes = new List<IShape>();
+
+            box.Shapes[0] = new Circle(new Film(), 2);
+            box.Shapes[1] = new Triangle(new Paper(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Paper(), 2);
+
+            expectedRes.Add(box.Shapes[1]);
+            expectedRes.Add(box.Shapes[3]);
+            var res = box.ExtractAllPaperShapes();
+
+            Assert.AreEqual(res, expectedRes);
+        }
+        
     }
 }
