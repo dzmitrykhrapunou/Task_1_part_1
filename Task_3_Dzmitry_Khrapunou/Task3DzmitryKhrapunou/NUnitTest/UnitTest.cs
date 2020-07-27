@@ -164,6 +164,36 @@ namespace NUnitTest
             Assert.AreEqual(box.Shapes[3], expectedRes);
         }
 
+        [TestCase(0)]
+        public void Search_Find_ReturnsIndex(int index)
+        {
+            var box = new Box();
+            var shape = new Triangle(new Paper(Color.Blue), 7);
+            box.Shapes[0] = new Triangle(new Paper(Color.Blue), 7);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+            
+            var expectedRes = box.Find(shape); ;
+
+            Assert.AreEqual(index, expectedRes);
+        }
+
+        [TestCase(true)]
+        public void Search_IsAnyEqual_ReturnsTrueIfEqual(bool expRes)
+        {
+            var box = new Box();
+            var shape = new Triangle(new Paper(Color.Blue), 7);
+            box.Shapes[0] = new Triangle(new Paper(Color.Blue), 7);
+            box.Shapes[1] = new Triangle(new Film(), 7);
+            box.Shapes[2] = new Square(new Film(), 2);
+            box.Shapes[3] = new Circle(new Film(), 2);
+
+            var expectedRes = box.IsAnyEqual(shape); ;
+
+            Assert.AreEqual(expRes, expectedRes);
+        }
+
         [TestCase(4)]
         public void Search_GetCountOfNotEmptyElementsInMas_ReturnsQuantity(int a)
         {

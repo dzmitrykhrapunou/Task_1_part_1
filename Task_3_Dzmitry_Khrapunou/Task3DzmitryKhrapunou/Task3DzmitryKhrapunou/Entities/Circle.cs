@@ -109,6 +109,7 @@ namespace Task3DzmitryKhrapunou.Entities
             else
             {
                 var comparedCircle = (Circle)obj;
+
                 Type currentMaterialType = this.Material.GetType();
                 dynamic currentMaterial = Convert.ChangeType(this.Material, currentMaterialType);
 
