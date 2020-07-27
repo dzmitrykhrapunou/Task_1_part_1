@@ -1,0 +1,26 @@
+<CATALOG>
+  <SHAPE>
+	<TYPE>Square</TYPE>
+	<MATERIAL>Film</MATERIAL>
+	<COLOR>NoColor</COLOR>
+	<SIDE>5</SIDE>
+  </SHAPE>
+  <SHAPE>
+	<TYPE>Triangle</TYPE>
+	<MATERIAL>Film</MATERIAL>
+	<COLOR>NoColor</COLOR>
+	<SIDE>4</SIDE>
+  </SHAPE>
+  <SHAPE>
+	<TYPE>Triangle</TYPE>
+	<MATERIAL>Film</MATERIAL>
+	<COLOR>NoColor</COLOR>
+	<SIDE>15</SIDE>
+  </SHAPE>
+  <SHAPE>
+	<TYPE>Circle</TYPE>
+	<MATERIAL>Film</MATERIAL>
+	<COLOR>NoColor</COLOR>
+	<RADIUS>5</RADIUS>
+  </SHAPE>
+</CATALOG>
