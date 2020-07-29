@@ -1,47 +1,52 @@
 ﻿using NUnit.Framework;
 using Task2Part3DzmitryKhrapunou;
+using Task2Part3DzmitryKhrapunou.Entities;
 
 namespace NUnitTest
 {
     [TestFixture]
     class ProductUnitTest
     {
-        [TestCase(3, "Savushkin", 4.45, 3, "Slavita", 3.47)]
-        public void SummationOfTwoProducts_ReturnsNewProduct(int x1, string name1, double cost1, int x2, string name2, double cost2)
+        [Test]
+        public void SummationOfTwoProducts_ReturnsNewProduct()
         {
-            ProductType type1 = (ProductType)x1;
-            ProductType type2 = (ProductType)x2;
+            var product1 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            var product2 = new Product(new Food("Milk"), new ProductName("Milkavita"), new Cost(3.47));
 
-            var product1 = new Product(type1, name1, cost1);
-            var product2 = new Product(type2, name2, cost2);
-
-            var expectedRes = product1 + product2;
-            var res = new Product(type2, name1 + " - " + name2, (cost1 + cost2)/2);
+            var res = product1 + product2;            
+            var newCost = (product1.Cost.CostValue + product2.Cost.CostValue) / 2;
+            var expectedRes = new Product(product1.Type, new ProductName(product1.Name.Name + " - " + product2.Name.Name), new Cost(newCost));
 
             Assert.AreEqual(expectedRes, res);
         }
-        
-         [TestCase(0, "Savushkin", 4.45, 1)]
-        public void ChangeProductType_ReturnsNewProduct(int x1, string name1, double cost1, int x2)
-        {
-            ProductType type1 = (ProductType)x1;
-            ProductType type2 = (ProductType)x2;
 
-            var product1 = new Product(type1, name1, cost1);            
-            var expectedRes = new Product(type2, name1, cost1);
-            var res = product1.ChangeType(type2);
-            
+        [Test]
+        public void ChangeProductType_ReturnsNewProduct()
+        {
+            var type = new Food("Milk");
+            var res = (Clothes)type;
+            var expectedRes = new Clothes("Milk");      
+
             Assert.AreEqual(expectedRes, res);
         }
 
-        [TestCase(0, "Savushkin", 4.45, 445)]
-        public void CostProductTransformation_ReturnsNewCost(int x1, string name1, double cost1, int cost2)
-        {
-            ProductType type1 = (ProductType)x1;
-            
-            var product1 = new Product(type1, name1, cost1);
-            var expectedRes = cost2;
+        [Test]
+        public void CostProductTransformation_ReturnsNewCost()
+        {            
+            var product1 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            var expectedRes = 445;
             var res = (int)product1;
+
+            Assert.AreEqual(expectedRes, res);
+        }
+
+        [Test]
+        public void ComparisonOfTwoProducts_ReturnsEquals()
+        {
+            var product1 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            var product2 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            bool expectedRes = true;
+            bool res = product1.Equals(product2);
 
             Assert.AreEqual(expectedRes, res);
         }

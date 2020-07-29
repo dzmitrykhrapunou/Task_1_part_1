@@ -1,4 +1,5 @@
 ﻿using System;
+using Task2Part3DzmitryKhrapunou.Entities;
 
 namespace Task2Part3DzmitryKhrapunou
 {
@@ -6,22 +7,19 @@ namespace Task2Part3DzmitryKhrapunou
     {
         static void Main(string[] args)
         {
-            var product1 = new Product(ProductType.Water, "Bonaqua", 2);
-            var product2 = new Product(ProductType.Cake, "Napoleon", 2.56);
-            var product3 = new Product(ProductType.Eggs, "Brest", 3);
-            var product4 = new Product(ProductType.Eggs, "Gomel", 2.5);
+            var product1 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            var product2 = new Product(new Food("Milk"), new ProductName("Milkavita"), new Cost(3.47));
+            var product3 = new Product(new Food("Milk"), new ProductName("Savushkin"), new Cost(4.45));
+            
+            var res = (int)product1;
+            var summ = product2 + product3;
 
-            var res = (int)product2;
-            var summ = product3 + product4;          
+            var type = new Food("Milk");
+            var newType = (Clothes)type;
 
-            Console.Write(product1.Type + " to ");
-
-            product1.ChangeType(ProductType.Wine);
-
-            Console.WriteLine(product1.Type);
-            Console.WriteLine(res);
-            Console.WriteLine(product2.Cost);
-            Console.WriteLine(summ);
+            Console.WriteLine(newType.GetType().Name);     
+            Console.WriteLine(res);       
+            Console.WriteLine(summ.ToString());
 
             Console.ReadLine();
         }      
