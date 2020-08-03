@@ -77,14 +77,14 @@ namespace Task4DzmitryKhrapunouSoketClient
         /// <param name="msg"></param>
         public string GetMsg()
         {
-            byte[] receivedBytes = new byte[1024];
+            byte[] buffer = new byte[1024];
             var size = 0;
             var serverAnswer = new StringBuilder();
 
             do
             {
-                size = sender.Receive(receivedBytes);
-                serverAnswer.Append(Encoding.UTF8.GetString(receivedBytes, 0, size));
+                size = sender.Receive(buffer);
+                serverAnswer.Append(Encoding.UTF8.GetString(buffer, 0, size));
             } 
             while (sender.Available > 0);
 
