@@ -49,13 +49,13 @@ namespace Task4DzmitryKhrapunou
             serverListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverListener.Bind(ipEndPoint);
 
-            SetupEvent();
+            EventSetup();
         }
 
         /// <summary>
         /// Setup event
         /// </summary>
-        private void SetupEvent()
+        private void EventSetup()
         {
             serverMessageHandler.MessageEvent += (ClientMessage message) =>
             {
@@ -70,6 +70,28 @@ namespace Task4DzmitryKhrapunou
         public List<ClientMessage> GetAllMessages()
         {
             return serverMessageHandler.messages;
+        }
+
+        public void SendMessage(ClientMessage msg)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(msg.ToString());
+            serverSocket.Send(bytes);
+        }
+
+        /// <summary>
+        /// Get message
+        /// </summary>
+        /// <returns></returns>
+        public ClientMessage GetMessage()
+        {
+            string[] data = GetString().Split('|');
+            string clientName = data[0];
+            string msgText = data[1];
+
+            ClientMessage message = new ClientMessage(clientName, msgText);
+            serverMessageHandler.InvokeMessageEvent(message);
+
+            return message;
         }
 
         /// <summary>
@@ -107,6 +129,21 @@ namespace Task4DzmitryKhrapunou
                 serverListener.Shutdown(SocketShutdown.Both);
                 serverListener.Close();
             }
+        }
+
+        private string GetString()
+        {
+            byte[] data = new byte[1024];
+            string result = null;
+            int number;
+
+            if (serverSocket.Available > 0)
+            {
+                number = serverSocket.Receive(data);
+                result = Encoding.UTF8.GetString(data, 0, number);
+            }
+
+            return result;
         }
     }
 }

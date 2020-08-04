@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Task4DzmitryKhrapunou.Entities;
 
 namespace Task4DzmitryKhrapunou
 {
@@ -76,7 +77,7 @@ namespace Task4DzmitryKhrapunou
         public string GetMessage()
         {
             byte[] buffer = new byte[1024];
-            var size = 0;
+            int size;
             var serverAnswer = new StringBuilder();
 
             do
@@ -96,9 +97,9 @@ namespace Task4DzmitryKhrapunou
         /// Send messeage to server
         /// </summary>
         /// <param name="msg"></param>
-        public void SendMessage(string msg)
+        public void SendMessage(ClientMessage msg)
         {
-            var data = Encoding.UTF8.GetBytes(msg);
+            byte[] data = Encoding.UTF8.GetBytes(msg.ClientName + "|" + msg.Content);
             sender.Connect(ipEndPoint);
             sender.Send(data);
             Disconnect();
