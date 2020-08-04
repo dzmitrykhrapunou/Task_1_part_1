@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Task4DzmitryKhrapunouSoketClient
+namespace Task4DzmitryKhrapunou
 {
     public class SocketClient
     {
@@ -21,6 +21,11 @@ namespace Task4DzmitryKhrapunouSoketClient
         /// Socket instance
         /// </summary>
         Socket sender;
+
+        /// <summary>
+        /// Client Message Handler
+        /// </summary>
+        ClientMessageHandler clientMessageHandler;
 
         /// <summary>
         /// Server IP
@@ -41,7 +46,10 @@ namespace Task4DzmitryKhrapunouSoketClient
         public SocketClient(int port = 1408, string serverIP = "127.0.0.1")
         {
             ServerIP = serverIP;
-            Port = port;
+            Port = port; 
+            clientMessageHandler = new ClientMessageHandler();
+
+            EventSetup();
         }
 
         public void Connect()
@@ -57,25 +65,15 @@ namespace Task4DzmitryKhrapunouSoketClient
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);
+                throw new Exception("Connection was failed. " + exception);
             }           
         }
-
-        /// <summary>
-        /// Delegate accepting any method 'void(string)
-        /// </summary>
-        /// <param name="msg"></param>
-        public delegate void MessageFromServer(string msg);
-        /// <summary>
-        /// Event to get message from server
-        /// </summary>
-        public event MessageFromServer GetMessageFromServer;
 
         /// <summary>
         /// Get message from server
         /// </summary>
         /// <param name="msg"></param>
-        public string GetMsg()
+        public string GetMessage()
         {
             byte[] buffer = new byte[1024];
             var size = 0;
@@ -88,21 +86,110 @@ namespace Task4DzmitryKhrapunouSoketClient
             } 
             while (sender.Available > 0);
 
-            GetMessageFromServer?.Invoke(serverAnswer.ToString());
-            sender.Shutdown(SocketShutdown.Both);
-            sender.Close();
-            return serverAnswer.ToString();
+            var answer = clientMessageHandler.InvokeMessageEvent(serverAnswer.ToString());
+            Disconnect();
+
+            return answer;
         }
 
         /// <summary>
         /// Send messeage to server
         /// </summary>
         /// <param name="msg"></param>
-        public void SendMsg(string msg)
+        public void SendMessage(string msg)
         {
             var data = Encoding.UTF8.GetBytes(msg);
             sender.Connect(ipEndPoint);
             sender.Send(data);
+            Disconnect();
+        }
+
+        /// <summary>
+        /// Converter
+        /// </summary>
+        private void EventSetup()
+        {            
+            clientMessageHandler.MessageEvent += (string msg) =>
+            {                
+                StringBuilder str = new StringBuilder();
+                string text = msg;
+
+                for (int i = 0; i < text.Length; i++)
+                {
+                    bool isLower = char.IsLower(text[i]);
+                    char letter = char.ToLower(text[i]);
+
+                    if (clientMessageHandler.EnglishDictionary.ContainsKey(letter.ToString()))
+                    {
+                        string dictionaryKey;
+                        char translationChar;
+
+                        if (i + 3 <= text.Length)
+                        {
+                            dictionaryKey = text.Substring(i, 3);
+
+                            if (clientMessageHandler.EnglishDictionary.TryGetValue(dictionaryKey, out translationChar))
+                            {
+                                if (!isLower)
+                                    translationChar = char.ToLower(translationChar);
+
+                                str.Append(translationChar);
+                                i += 2;
+                                continue;
+                            }
+                        }
+
+                        if (i + 2 <= text.Length)
+                        {
+                            dictionaryKey = text.Substring(i, 2);
+
+                            if (clientMessageHandler.EnglishDictionary.TryGetValue(dictionaryKey, out translationChar))
+                            {
+                                if (!isLower)
+                                    translationChar = char.ToLower(translationChar);
+
+                                str.Append(translationChar);
+                                i++;
+                                continue;
+                            }
+                        }
+
+                        if (clientMessageHandler.EnglishDictionary.TryGetValue(letter.ToString(), out translationChar))
+                        {
+                            if (!isLower)
+                                translationChar = char.ToLower(translationChar);
+
+                            str.Append(translationChar);
+                        }
+                    }
+                    else
+                    {
+                        if (clientMessageHandler.RussianDictionary.TryGetValue(letter, out string translationString))
+                        {
+                            if (isLower)
+                            {
+                                str.Append(translationString);
+                            }
+                            else
+                            {
+                                var buffer = new StringBuilder(translationString);
+                                buffer[0] = char.ToUpper(buffer[0]);
+                                str.Append(buffer);
+                            }
+                        }
+                        else
+                        {
+                            str.Append(letter);
+                        }
+                    }
+                }
+
+                return str.ToString();               
+            };
+        }
+
+        private void Disconnect()
+        {
             sender.Shutdown(SocketShutdown.Both);
             sender.Close();
         }

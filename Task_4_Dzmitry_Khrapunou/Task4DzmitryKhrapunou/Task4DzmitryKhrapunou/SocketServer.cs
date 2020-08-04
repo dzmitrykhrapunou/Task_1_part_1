@@ -1,26 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Task4DzmitryKhrapunou.Entities;
 
-namespace Task4DzmitryKhrapunouSocketServer
+namespace Task4DzmitryKhrapunou
 {
     public class SocketServer
     {
         /// <summary>
         /// Local endpoint
         /// </summary>
-        IPEndPoint ipEndPoint = null;
+        IPEndPoint ipEndPoint;
 
         /// <summary>
-        /// Server socket instance
+        /// Server socket
         /// </summary>
-        Socket serverSocket = null;
+        Socket serverSocket;
 
         /// <summary>
-        /// Server listener instance
+        /// Server listener
         /// </summary>
-        Socket serverListener = null;
+        Socket serverListener;
+
+        /// <summary>
+        /// Server message handler
+        /// </summary>
+        ServerMessageHandler serverMessageHandler;
 
         /// <summary>
         /// Port number
@@ -37,20 +44,42 @@ namespace Task4DzmitryKhrapunouSocketServer
             Port = port;
             IpAdress = ipAdress;
 
+            serverMessageHandler = new ServerMessageHandler();
             ipEndPoint = new IPEndPoint(IPAddress.Parse(ipAdress), port);
             serverListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverListener.Bind(ipEndPoint);
+
+            SetupEvent();
+        }
+
+        /// <summary>
+        /// Setup event
+        /// </summary>
+        private void SetupEvent()
+        {
+            serverMessageHandler.MessageEvent += (ClientMessage message) =>
+            {
+                serverMessageHandler.messages.Add(message);
+            };
+        }
+
+        /// <summary>
+        /// Get all client messages
+        /// </summary>
+        /// <returns></returns>
+        public List<ClientMessage> GetAllMessages()
+        {
+            return serverMessageHandler.messages;
         }
 
         /// <summary>
         /// Method waiting and get message from clients
-        /// </summary>
-        /// <param name="num"></param>
-        public void ListenClient(int num)
+        /// </summary>        
+        public void ListenClient()
         {
             if (serverListener != null)
             {
-                serverListener.Listen(num);
+                serverListener.Listen(1);
                 serverSocket = serverListener.Accept();
             }
             else
@@ -61,8 +90,7 @@ namespace Task4DzmitryKhrapunouSocketServer
             while (true)
             {
                 byte[] buffer = new byte[1024];
-
-                var size = 0;
+                int size;
 
                 StringBuilder data = new StringBuilder();
 
