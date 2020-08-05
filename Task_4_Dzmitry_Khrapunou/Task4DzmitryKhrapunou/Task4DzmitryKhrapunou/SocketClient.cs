@@ -72,23 +72,20 @@ namespace Task4DzmitryKhrapunou
 
         /// <summary>
         /// Get message from server
-        /// </summary>
-        /// <param name="msg"></param>
+        /// </summary>        
         public string GetMessage()
         {
             byte[] buffer = new byte[1024];
             int size;
             var serverAnswer = new StringBuilder();
 
-            do
+            while (sender.Available > 0)
             {
                 size = sender.Receive(buffer);
                 serverAnswer.Append(Encoding.UTF8.GetString(buffer, 0, size));
-            } 
-            while (sender.Available > 0);
+            }
 
-            var answer = clientMessageHandler.InvokeMessageEvent(serverAnswer.ToString());
-            Disconnect();
+            var answer = clientMessageHandler.InvokeMessageEvent(serverAnswer.ToString());            
 
             return answer;
         }
@@ -99,10 +96,8 @@ namespace Task4DzmitryKhrapunou
         /// <param name="msg"></param>
         public void SendMessage(ClientMessage msg)
         {
-            byte[] data = Encoding.UTF8.GetBytes(msg.ClientName + "|" + msg.Content);
-            sender.Connect(ipEndPoint);
-            sender.Send(data);
-            Disconnect();
+            byte[] data = Encoding.UTF8.GetBytes(msg.ClientName + "|" + msg.Content);           
+            sender.Send(data);            
         }
 
         /// <summary>
@@ -189,7 +184,7 @@ namespace Task4DzmitryKhrapunou
             };
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             sender.Shutdown(SocketShutdown.Both);
             sender.Close();
