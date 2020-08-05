@@ -42,11 +42,10 @@ namespace NUnitTests
             clientSocket.Connect();
             var message = new ClientMessage(client, "Hello");
 
-            expectedAnswer = "цлиент нaме: вaсya пупкин, мессaге: xелло";
+            expectedAnswer = "Цлиент нaме: Вaсya Пупкин, Мессaге: Xелло";
             clientSocket.SendMessage(message);
 
             while (wait);
-
             Thread.Sleep(1000);
 
             actualAnswer = clientSocket.GetMessage();                    
@@ -54,6 +53,6 @@ namespace NUnitTests
             Assert.NotNull(expectedAnswer);
             Assert.NotNull(actualAnswer);
             Assert.AreEqual(expectedAnswer, actualAnswer);
-        }        
+        }
     }
 }

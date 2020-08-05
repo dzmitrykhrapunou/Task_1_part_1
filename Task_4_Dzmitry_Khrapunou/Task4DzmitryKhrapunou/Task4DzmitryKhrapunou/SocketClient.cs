@@ -127,7 +127,7 @@ namespace Task4DzmitryKhrapunou
                             if (clientMessageHandler.EnglishDictionary.TryGetValue(dictionaryKey, out translationChar))
                             {
                                 if (!isLower)
-                                    translationChar = char.ToLower(translationChar);
+                                    translationChar = char.ToUpper(translationChar);
 
                                 str.Append(translationChar);
                                 i += 2;
@@ -142,7 +142,7 @@ namespace Task4DzmitryKhrapunou
                             if (clientMessageHandler.EnglishDictionary.TryGetValue(dictionaryKey, out translationChar))
                             {
                                 if (!isLower)
-                                    translationChar = char.ToLower(translationChar);
+                                    translationChar = char.ToUpper(translationChar);
 
                                 str.Append(translationChar);
                                 i++;
@@ -153,7 +153,7 @@ namespace Task4DzmitryKhrapunou
                         if (clientMessageHandler.EnglishDictionary.TryGetValue(letter.ToString(), out translationChar))
                         {
                             if (!isLower)
-                                translationChar = char.ToLower(translationChar);
+                                translationChar = char.ToUpper(translationChar);
 
                             str.Append(translationChar);
                         }
