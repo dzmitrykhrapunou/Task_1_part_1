@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using System;
-using Task5DzmitryKhrapunou;
-using Task5DzmitryKhrapunou.Data;
-using Task5DzmitryKhrapunou.Entity;
+using Task5Part1DzmitryKhrapunou;
+using Task5Part1DzmitryKhrapunou.Data;
+using Task5Part1DzmitryKhrapunou.Entity;
 
-namespace NUnitTests
+namespace UnitTestsPart1
 {
     [TestFixture]
     public class Tests

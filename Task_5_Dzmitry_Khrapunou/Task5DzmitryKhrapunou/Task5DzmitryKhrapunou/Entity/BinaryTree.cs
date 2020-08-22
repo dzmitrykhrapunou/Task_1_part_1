@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task5DzmitryKhrapunou.Entity
+namespace Task5Part1DzmitryKhrapunou.Entity
 {
     /// <summary>
     /// Binary tree

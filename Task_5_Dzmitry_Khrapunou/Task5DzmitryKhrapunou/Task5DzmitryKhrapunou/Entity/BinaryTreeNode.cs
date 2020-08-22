@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Task5DzmitryKhrapunou.Entity
+namespace Task5Part1DzmitryKhrapunou.Entity
 {
     /// <summary>
     /// Node of binary tree

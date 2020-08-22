@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace Task5DzmitryKhrapunou.Entity
+namespace Task5Part1DzmitryKhrapunou.Entity
 {
     public class BinaryTreeSerializer
     {

@@ -1,4 +1,4 @@
-﻿namespace Task5DzmitryKhrapunou.Data
+﻿namespace Task5Part1DzmitryKhrapunou.Data
 {
     /// <summary>
     /// Name of test

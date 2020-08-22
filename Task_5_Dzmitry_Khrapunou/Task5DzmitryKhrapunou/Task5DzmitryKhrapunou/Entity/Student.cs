@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task5DzmitryKhrapunou
+namespace Task5Part1DzmitryKhrapunou
 {
     public class Student: IComparable
     {

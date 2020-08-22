@@ -1,7 +1,7 @@
 ﻿using System;
-using Task5DzmitryKhrapunou.Data;
+using Task5Part1DzmitryKhrapunou.Data;
 
-namespace Task5DzmitryKhrapunou
+namespace Task5Part1DzmitryKhrapunou
 {
     public class Test
     {

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task5DzmitryKhrapunou", "Task5DzmitryKhrapunou\Task5DzmitryKhrapunou.csproj", "{34B34961-23A4-4397-9C25-0D7488AF83CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task5Part1DzmitryKhrapunou", "Task5DzmitryKhrapunou\Task5Part1DzmitryKhrapunou.csproj", "{34B34961-23A4-4397-9C25-0D7488AF83CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTests", "NUnitTests\NUnitTests.csproj", "{84EBDE22-455A-45CC-B7B6-6F3F51A15FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTests", "NUnitTests\NUnitTests.csproj", "{84EBDE22-455A-45CC-B7B6-6F3F51A15FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task5Part2DzmitryKhrapunou", "Task5Part2DzmitryKhrapunou\Task5Part2DzmitryKhrapunou.csproj", "{D5F86C67-9EA7-4A74-A0F5-3442FBC03D75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{84EBDE22-455A-45CC-B7B6-6F3F51A15FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84EBDE22-455A-45CC-B7B6-6F3F51A15FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84EBDE22-455A-45CC-B7B6-6F3F51A15FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5F86C67-9EA7-4A74-A0F5-3442FBC03D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F86C67-9EA7-4A74-A0F5-3442FBC03D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F86C67-9EA7-4A74-A0F5-3442FBC03D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F86C67-9EA7-4A74-A0F5-3442FBC03D75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
