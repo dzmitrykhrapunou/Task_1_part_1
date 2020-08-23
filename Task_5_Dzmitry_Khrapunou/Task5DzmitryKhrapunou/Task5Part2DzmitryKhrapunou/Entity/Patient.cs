@@ -1,24 +1,29 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Task5Part2DzmitryKhrapunou.Data;
 
 namespace Task5Part2DzmitryKhrapunou
 {
     [Serializable]
+    [DataContract]
     public class Patient
     {
         /// <summary>
         /// First name of patient 
         /// </summary>
+        [DataMember]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Last name of patient 
         /// </summary>
+        [DataMember]
         public string LastName { get; set; }
 
         /// <summary>
         /// To the doctor
         /// </summary>
+        [DataMember]
         public Doctor Doctor { get; set; }
 
         /// <summary>

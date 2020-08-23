@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Task5Part2DzmitryKhrapunou.Entity
 {
     [Serializable]
     public class CollectionOfPatients<T> : ICollection<T> where T : Patient
     {
-        private List<T> patients = new List<T>();
+        /// <summary>
+        /// List of patients
+        /// </summary>
+        private List<T> patients;
+
+        /// <summary>
+        /// Constructor to initialise list of patients.
+        /// </summary>
+        /// <param name="patients"></param>
+        public CollectionOfPatients(IEnumerable<T> patients)
+        {
+           this.patients = patients.ToList();
+        }
 
         /// <summary>
         /// Adds a patient to the collection of patients.
